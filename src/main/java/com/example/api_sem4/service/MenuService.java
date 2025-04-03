@@ -22,11 +22,12 @@ public class MenuService {
 
     public Menu saveMenu(MenuDTO menuDTO) {
         Menu menu = new Menu();
+        menu.setId(menuDTO.getId());
         menu.setDate(menuDTO.getDate());
         menu.setBreakfast(menuDTO.getBreakfast());
         menu.setLunch(menuDTO.getLunch());
         menu.setDinner(menuDTO.getDinner());
-        return menu;
+        return menuRepository.save(menu);
     }
 
     public Menu updateMenu(MenuDTO menuDTO){

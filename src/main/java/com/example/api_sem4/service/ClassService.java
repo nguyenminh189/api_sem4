@@ -24,7 +24,7 @@ public class ClassService {
         Class aClass = new Class();
         aClass.setName(classDTO.getName());
         aClass.setGrade(classDTO.getGrade());
-        return aClass;
+        return classRepository.save(aClass);
     }
 
     public Class updateClass(ClassDTO classDTO){

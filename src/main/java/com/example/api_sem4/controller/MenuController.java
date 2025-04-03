@@ -18,13 +18,13 @@ public class MenuController {
         this.menuService = menuService;
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<Menu> addMenu(@RequestBody MenuDTO menuDTO) {
         Menu savedMenu = menuService.saveMenu(menuDTO);
         return ResponseEntity.ok(savedMenu);
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public List<Menu> getAllMenus() {
         return menuService.getAllMenus();
     }
