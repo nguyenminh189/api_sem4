@@ -1,5 +1,6 @@
 package com.example.api_sem4.controller;
 
+import com.example.api_sem4.dto.ScheduleDTO;
 import com.example.api_sem4.entity.Schedule;
 import com.example.api_sem4.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class ScheduleController {
 
     // Lấy tất cả lịch học cho lớp học và ngày trong tuần
     @GetMapping("/class/{classId}/day/{dayOfWeek}")
-    public List<Schedule> getSchedulesByClassAndDay(@PathVariable Long classId, @PathVariable String dayOfWeek) {
+    public List<ScheduleDTO> getSchedulesByClassAndDay(@PathVariable Long classId, @PathVariable String dayOfWeek) {
         return scheduleService.getSchedulesByClassAndDay(classId, dayOfWeek);
     }
 
