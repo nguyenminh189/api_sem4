@@ -23,10 +23,14 @@ public class MenuService {
     public Menu saveMenu(MenuDTO menuDTO) {
         Menu menu = new Menu();
         menu.setId(menuDTO.getId());
-        menu.setDate(menuDTO.getDate());
+        menu.setDay_of_week(menuDTO.getDay_of_week());
+        menu.setStart_date(menuDTO.getStart_date());
+        menu.setEnd_date(menuDTO.getEnd_date());
         menu.setBreakfast(menuDTO.getBreakfast());
+        menu.setSecond_breakfast(menuDTO.getSecond_breakfast());
         menu.setLunch(menuDTO.getLunch());
         menu.setDinner(menuDTO.getDinner());
+        menu.setSecond_dinner(menuDTO.getSecond_dinner());
         return menuRepository.save(menu);
     }
 
