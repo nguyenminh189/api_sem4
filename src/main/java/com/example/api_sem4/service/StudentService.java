@@ -26,7 +26,6 @@ public class StudentService {
         student.setPhone(studentDTO.getPhone());
         student.setEmail(studentDTO.getEmail());
         student.setDob(studentDTO.getDob());
-
         return studentRepository.save(student);
     }
     public List<Student> getAllStudents() {
