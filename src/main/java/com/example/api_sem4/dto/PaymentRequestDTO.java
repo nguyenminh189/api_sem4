@@ -3,7 +3,7 @@ package com.example.api_sem4.dto;
 import java.util.Date;
 
 public class PaymentRequestDTO {
-    private String name;
+    private String month;
     private double tuitionFee;
     private double lunchFee;
     private double additionalFee;
@@ -20,12 +20,12 @@ public class PaymentRequestDTO {
         this.tuitionFee = tuitionFee;
     }
 
-    public String getName() {
-        return name;
+    public String getMonth() {
+        return month;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
     public double getLunchFee() {

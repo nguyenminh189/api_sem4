@@ -15,8 +15,8 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "month")
+    private String month;
 
     @Column(name = "tuition_fee")
     private double tuitionFee;
@@ -41,12 +41,12 @@ public class Payment {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getMonth() {
+        return month;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
     public double getTuitionFee() {

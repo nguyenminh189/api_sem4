@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class PaymentResponseDTO {
     private Long id;
-    private String name;
+    private String month;
     private double tuitionFee;
     private double lunchFee;
     private double additionalFee;
@@ -19,12 +19,12 @@ public class PaymentResponseDTO {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getMonth() {
+        return month;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
     public double getTuitionFee() {

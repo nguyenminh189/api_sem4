@@ -19,7 +19,7 @@ public class PaymentService {
 
     public PaymentResponseDTO createPayment(PaymentRequestDTO dto) {
         Payment payment = new Payment();
-        payment.setName(dto.getName());
+        payment.setMonth(dto.getMonth());
         payment.setTuitionFee(dto.getTuitionFee());
         payment.setLunchFee(dto.getLunchFee());
         payment.setAdditionalFee(dto.getAdditionalFee());
@@ -34,7 +34,7 @@ public class PaymentService {
         Payment payment = paymentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Payment not found"));
 
-        payment.setName(dto.getName());
+        payment.setMonth(dto.getMonth());
         payment.setTuitionFee(dto.getTuitionFee());
         payment.setLunchFee(dto.getLunchFee());
         payment.setAdditionalFee(dto.getAdditionalFee());
@@ -51,7 +51,7 @@ public class PaymentService {
     private PaymentResponseDTO mapToResponseDTO(Payment payment) {
         PaymentResponseDTO dto = new PaymentResponseDTO();
         dto.setId(payment.getId());
-        dto.setName(payment.getName());
+        dto.setMonth(payment.getMonth());
         dto.setTuitionFee(payment.getTuitionFee());
         dto.setLunchFee(payment.getLunchFee());
         dto.setAdditionalFee(payment.getAdditionalFee());
