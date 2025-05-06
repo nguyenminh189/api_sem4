@@ -3,26 +3,36 @@ package com.example.api_sem4.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "user_accounts")
-
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String email;
-    private String name;
-    private String password;
-    @Enumerated(EnumType.STRING)  // Chỉ định kiểu ENUM và lưu giá trị dưới dạng String
-    private Role role;
 
-    public enum Role {
-        admin,
-        teacher,
-        parent
+    @Column(name = "name")
+    private String fullName;
+    private String email;
+    private String password;
+
+    @ManyToMany(targetEntity = Permission.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_permission",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id"))
+
+    private List<Permission> permissions= new ArrayList<>();
+
+    public List<Permission> getPermissions() {
+        return permissions;
     }
 
     public Long getId() {
@@ -33,6 +43,14 @@ public class User {
         this.id = id;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -41,27 +59,46 @@ public class User {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getPermissions().stream().map(
+                p-> new SimpleGrantedAuthority(p.getPermission())
+        ).collect(Collectors.toList());
     }
 
     public String getPassword() {
         return password;
     }
 
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+//        return UserDetails.super.isAccountNonExpired();
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+//        return UserDetails.super.isAccountNonLocked();
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+//        return UserDetails.super.isCredentialsNonExpired();
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
+
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }
